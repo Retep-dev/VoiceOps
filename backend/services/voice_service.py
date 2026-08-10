@@ -10,14 +10,12 @@ from models.voice import (
 )
 from providers.asr.factory import get_asr_provider
 from providers.tts.factory import get_tts_provider
-from providers.llm.nvidia_llm import NvidiaLLMProvider
+from agents.orchestrator import orchestrator
+from models.agent import AgentResponse
 
 
 class VoiceService:
-    """Orchestrates end-to-end audio ingestion, ASR transcription, LLM generation, and TTS synthesis."""
-
-    def __init__(self):
-        self.llm_provider = NvidiaLLMProvider()
+    """Orchestrates end-to-end audio ingestion, ASR transcription, Multi-Agent execution, and TTS synthesis."""
 
     async def process_voice_interaction(self, request: VoiceInteractionRequest) -> VoiceInteractionResponse:
         total_start = time.time()
@@ -54,21 +52,16 @@ class VoiceService:
 
         asr_ms = round((time.time() - asr_start) * 1000, 2)
 
-        # Step 2: LLM Reasoning
-        llm_start = time.time()
-        messages = [
-            {
-                "role": "system",
-                "content": (
-                    "You are VoiceOps, a helpful AI customer operations voice assistant. "
-                    "Provide clear, concise, and professional spoken answers. Keep responses under 3 sentences for natural text-to-speech rendering."
-                ),
-            },
-            {"role": "user", "content": transcript_text},
-        ]
-        llm_response = await self.llm_provider.chat_completion(messages)
-        ai_response_text = llm_response.get("content", "Thank you for reaching out to VoiceOps support.")
-        llm_ms = round((time.time() - llm_start) * 1000, 2)
+        # Step 2: Multi-Agent Orchestrator (Supervisor -> Specialist Agent -> Tools -> Grounded Response)
+        agent_start = time.time()
+        agent_res: AgentResponse = await orchestrator.process_user_message(
+            user_message=transcript_text,
+            conversation_history=[],
+            customer_id=request.customer_id or "cust_1001",
+            conversation_id=conv_id,
+        )
+        ai_response_text = agent_res.content
+        agent_ms = round((time.time() - agent_start) * 1000, 2)
 
         # Step 3: Text-to-Speech Synthesis
         tts_start = time.time()
@@ -83,17 +76,18 @@ class VoiceService:
             transcript=transcript_text,
             ai_response_text=ai_response_text,
             audio_base64=tts_result.audio_base64,
-            active_agent="voice_operations_agent",
-            tool_calls=llm_response.get("tool_calls", []),
+            active_agent=agent_res.agent_name,
+            tool_calls=agent_res.tool_calls,
             asr_metadata=asr_metadata,
             tts_metadata=tts_result.metadata,
             latency_breakdown_ms={
                 "asr_latency_ms": asr_ms,
-                "llm_latency_ms": llm_ms,
+                "agent_latency_ms": agent_ms,
                 "tts_latency_ms": tts_ms,
                 "total_latency_ms": total_ms,
             },
         )
+
 
 
 voice_service = VoiceService()
