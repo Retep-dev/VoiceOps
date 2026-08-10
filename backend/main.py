@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import get_settings
-from api import voice, knowledge, escalations
+from api import voice, knowledge, escalations, evaluations
 
 
 def create_app() -> FastAPI:
@@ -27,6 +27,8 @@ def create_app() -> FastAPI:
     app.include_router(voice.router, prefix="/api/voice", tags=["Voice Engine"])
     app.include_router(knowledge.router, prefix="/api/knowledge", tags=["Enterprise Knowledge Base"])
     app.include_router(escalations.router, prefix="/api/escalations", tags=["Human Escalation Queue"])
+    app.include_router(evaluations.router, prefix="/api/evaluations", tags=["Evaluation & Benchmarks"])
+
 
 
 
