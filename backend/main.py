@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import get_settings
-from api import voice
+from api import voice, knowledge
 
 
 def create_app() -> FastAPI:
@@ -25,6 +25,8 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(voice.router, prefix="/api/voice", tags=["Voice Engine"])
+    app.include_router(knowledge.router, prefix="/api/knowledge", tags=["Enterprise Knowledge Base"])
+
 
     @app.get("/health")
     async def health_check():
