@@ -1,0 +1,42 @@
+[
+  {
+    "text": "I was charged for my order but it is not showing up in my account.",
+    "intent": "payment_issue"
+  },
+  {
+    "text": "Why was my card billed twice for order ORD-8842?",
+    "intent": "payment_issue"
+  },
+  {
+    "text": "Where is my package? The tracking link isn't updating.",
+    "intent": "order_tracking"
+  },
+  {
+    "text": "Can you check the delivery status of order ORD-9921?",
+    "intent": "order_tracking"
+  },
+  {
+    "text": "I want a full refund for my damaged item.",
+    "intent": "refund_request"
+  },
+  {
+    "text": "How do I return this headphones for a refund?",
+    "intent": "refund_request"
+  },
+  {
+    "text": "What is your return policy window for items?",
+    "intent": "policy_inquiry"
+  },
+  {
+    "text": "Are software licenses eligible for warranty coverage?",
+    "intent": "policy_inquiry"
+  },
+  {
+    "text": "Let me speak to a human representative right away.",
+    "intent": "human_escalation"
+  },
+  {
+    "text": "Connect me to a supervisor, your bot isn't helping.",
+    "intent": "human_escalation"
+  }
+]
