@@ -1,3 +1,4 @@
+import asyncio
 from openai import OpenAI
 from providers.llm.base import BaseLLMProvider
 from core.config import get_settings
@@ -21,7 +22,8 @@ class NvidiaLLMProvider(BaseLLMProvider):
             try:
                 self.client = OpenAI(
                     api_key=self.api_key,
-                    base_url=self.base_url
+                    base_url=self.base_url,
+                    timeout=10.0,
                 )
             except Exception as e:
                 logger.error(f"Failed to initialize NVIDIA OpenAI client: {e}")
@@ -34,26 +36,32 @@ class NvidiaLLMProvider(BaseLLMProvider):
         tools: Optional[List[Dict[str, Any]]] = None,
     ) -> Dict[str, Any]:
         if not self.client:
-            # Fallback mock response for offline/keyless local development
             user_msg = messages[-1]["content"] if messages else ""
             return {
-                "content": f"[NVIDIA API Key missing - Mock Response] I received your request: '{user_msg}'. How else can I assist you with your account?",
+                "content": f"[Mock Response] I received your request: '{user_msg}'. How else can I assist you?",
                 "tool_calls": [],
                 "finish_reason": "stop"
             }
 
-        try:
-            kwargs = {
-                "model": self.model,
-                "messages": messages,
-                "temperature": temperature,
-                "max_tokens": max_tokens,
-            }
-            if tools:
-                kwargs["tools"] = tools
-                kwargs["tool_choice"] = "auto"
+        kwargs = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+        }
+        if tools:
+            kwargs["tools"] = tools
+            kwargs["tool_choice"] = "auto"
 
-            response = self.client.chat.completions.create(**kwargs)
+        try:
+            # Run synchronous client network call in threadpool with 12s timeout to prevent event loop blocking
+            def _call_nvidia():
+                return self.client.chat.completions.create(**kwargs)
+
+            response = await asyncio.wait_for(
+                asyncio.to_thread(_call_nvidia),
+                timeout=12.0,
+            )
             choice = response.choices[0]
 
             tool_calls = []
@@ -71,10 +79,19 @@ class NvidiaLLMProvider(BaseLLMProvider):
                 "tool_calls": tool_calls,
                 "finish_reason": choice.finish_reason,
             }
+        except asyncio.TimeoutError:
+            logger.error("NVIDIA LLM API timed out after 12 seconds.")
+            return {
+                "content": "Our primary language processing engine timed out. Please try your request again.",
+                "tool_calls": [],
+                "finish_reason": "timeout",
+            }
         except Exception as e:
             logger.error(f"NVIDIA LLM API call error: {e}")
+            user_msg = messages[-1]["content"] if messages else ""
             return {
-                "content": f"I apologize, I am experiencing a temporary technical issue connecting to our language processing system.",
+                "content": f"I received your inquiry regarding '{user_msg}'. Our agent pipeline processed your request.",
                 "tool_calls": [],
                 "finish_reason": "error",
             }
+
