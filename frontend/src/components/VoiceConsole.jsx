@@ -1,54 +1,78 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Mic, MicOff, Send, Cpu, Wrench, Volume2, Clock, CheckCircle2, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 export default function VoiceConsole() {
   const [isRecording, setIsRecording] = useState(false);
+  const [liveTranscript, setLiveTranscript] = useState('');
   const [textInput, setTextInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [interactionResult, setInteractionResult] = useState(null);
   const [audioUrl, setAudioUrl] = useState(null);
 
-  const mediaRecorderRef = useRef(null);
-  const audioChunksRef = useRef([]);
+  const recognitionRef = useRef(null);
 
-  const handleStartRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorderRef.current = new MediaRecorder(stream);
-      audioChunksRef.current = [];
+  useEffect(() => {
+    // Initialize Web Speech API for real-time browser microphone ASR
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
 
-      mediaRecorderRef.current.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          audioChunksRef.current.push(event.data);
+      recognition.onresult = (event) => {
+        let transcriptStr = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcriptStr += event.results[i][0].transcript;
         }
+        setLiveTranscript(transcriptStr);
       };
 
-      mediaRecorderRef.current.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-        const reader = new FileReader();
-        reader.readAsDataURL(audioBlob);
-        reader.onloadend = async () => {
-          const base64Audio = reader.result.split(',')[1];
-          await submitVoiceInteraction({ audio_base64: base64Audio });
-        };
+      recognition.onend = () => {
+        setIsRecording(false);
       };
 
-      mediaRecorderRef.current.start();
-      setIsRecording(true);
-    } catch (err) {
-      console.warn("Microphone access denied or unreleased — using test voice payload:", err);
-      setIsRecording(false);
-      // Fallback submit for demonstration
-      await submitVoiceInteraction({ text_input: "Where is my recent order ORD-8842?" });
+      recognition.onerror = (err) => {
+        console.warn("Speech recognition error:", err);
+        setIsRecording(false);
+      };
+
+      recognitionRef.current = recognition;
+    }
+  }, []);
+
+  const handleStartRecording = () => {
+    setLiveTranscript('');
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.start();
+        setIsRecording(true);
+      } catch (e) {
+        console.warn("Recognition start error:", e);
+      }
+    } else {
+      alert("Browser speech recognition not supported. Please use text input or Chrome/Edge.");
     }
   };
 
   const handleStopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop();
+    if (recognitionRef.current && isRecording) {
+      recognitionRef.current.stop();
       setIsRecording(false);
+
+      // Submit captured live transcript if available
+      if (liveTranscript.trim()) {
+        submitVoiceInteraction({ text_input: liveTranscript });
+      }
     }
   };
+
+  // Automatically submit when recognition finishes with a transcript
+  useEffect(() => {
+    if (!isRecording && liveTranscript.trim() && !isLoading) {
+      submitVoiceInteraction({ text_input: liveTranscript });
+    }
+  }, [isRecording]);
 
   const submitVoiceInteraction = async (payload) => {
     setIsLoading(true);
@@ -59,8 +83,6 @@ export default function VoiceConsole() {
         body: JSON.stringify({
           ...payload,
           customer_id: 'cust_1001',
-          asr_provider: 'mock',
-          tts_provider: 'mock',
         }),
       });
       const data = await res.json();
@@ -118,8 +140,15 @@ export default function VoiceConsole() {
             </button>
           </div>
           <p style={{ fontSize: '0.9rem', fontWeight: '600', color: isRecording ? '#f43f5e' : 'var(--text-muted)' }}>
-            {isRecording ? 'Listening... Speak your request now' : 'Click microphone to record customer voice input'}
+            {isRecording ? 'Listening... Speak your request now' : 'Click microphone to speak your request'}
           </p>
+
+          {/* Real-time live transcript display */}
+          {liveTranscript && (
+            <div style={{ marginTop: '16px', padding: '10px 14px', borderRadius: '10px', background: 'rgba(6, 182, 212, 0.15)', border: '1px solid rgba(6, 182, 212, 0.3)', fontSize: '0.9rem', color: '#38bdf8' }}>
+              <span style={{ fontWeight: '700' }}>Live Speech: </span>"{liveTranscript}"
+            </div>
+          )}
 
           {/* Quick preset buttons */}
           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '16px', flexWrap: 'wrap' }}>
@@ -195,7 +224,7 @@ export default function VoiceConsole() {
 
             {/* Transcript & AI Response */}
             <div style={{ background: 'rgba(0, 0, 0, 0.3)', padding: '16px', borderRadius: '12px' }}>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '4px' }}>Customer ASR Transcript:</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '4px' }}>Customer Speech Transcript:</p>
               <p style={{ fontSize: '0.95rem', fontWeight: '600', color: '#fff', marginBottom: '12px' }}>"{interactionResult.transcript}"</p>
               
               <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '4px' }}>AI Agent Response:</p>
@@ -247,7 +276,7 @@ export default function VoiceConsole() {
           </div>
         ) : (
           <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-muted)' }}>
-            Record audio or enter text to inspect real-time agent routing, tool execution, and latency waterfalls.
+            Speak into your microphone or enter text to inspect real-time agent routing, tool execution, and latency waterfalls.
           </div>
         )}
       </div>
