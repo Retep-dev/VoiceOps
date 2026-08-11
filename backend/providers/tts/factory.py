@@ -10,9 +10,11 @@ def get_tts_provider(provider_name: str = None) -> BaseTTSProvider:
     settings = get_settings()
     name = (provider_name or settings.default_tts_provider).lower()
 
-    if name == "elevenlabs":
+    # Automatically prioritize real ElevenLabs or OpenAI TTS if API key is present in .env
+    if name == "elevenlabs" or (settings.elevenlabs_api_key and len(settings.elevenlabs_api_key) > 20 and not settings.elevenlabs_api_key.startswith("your_")):
         return ElevenLabsTTSProvider()
-    elif name == "openai":
+    elif name == "openai" or (settings.openai_api_key and len(settings.openai_api_key) > 20 and not settings.openai_api_key.startswith("your_")):
         return OpenAITTSProvider()
     else:
         return MockTTSProvider()
+

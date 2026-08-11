@@ -60,19 +60,27 @@ export default function VoiceConsole() {
       recognitionRef.current.stop();
       setIsRecording(false);
 
-      // Submit captured live transcript if available
       if (liveTranscript.trim()) {
         submitVoiceInteraction({ text_input: liveTranscript });
       }
     }
   };
 
-  // Automatically submit when recognition finishes with a transcript
   useEffect(() => {
     if (!isRecording && liveTranscript.trim() && !isLoading) {
       submitVoiceInteraction({ text_input: liveTranscript });
     }
   }, [isRecording]);
+
+  const speakTextOutLoud = (text) => {
+    if ('speechSynthesis' in window && text) {
+      window.speechSynthesis.cancel(); // Stop previous speech
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+      window.speechSynthesis.speak(utterance);
+    }
+  };
 
   const submitVoiceInteraction = async (payload) => {
     setIsLoading(true);
@@ -88,8 +96,15 @@ export default function VoiceConsole() {
       const data = await res.json();
       setInteractionResult(data);
 
+      // 1. Browser Natural Text-to-Speech Output
+      if (data.ai_response_text) {
+        speakTextOutLoud(data.ai_response_text);
+      }
+
+      // 2. Audio Player Blob Setup
       if (data.audio_base64) {
-        const audioBlob = new Blob([Uint8Array.from(atob(data.audio_base64), c => c.charCodeAt(0))], { type: 'audio/mp3' });
+        const mimeType = data.tts_metadata?.audio_format === 'mp3' ? 'audio/mp3' : 'audio/wav';
+        const audioBlob = new Blob([Uint8Array.from(atob(data.audio_base64), c => c.charCodeAt(0))], { type: mimeType });
         setAudioUrl(URL.createObjectURL(audioBlob));
       }
     } catch (error) {
@@ -227,14 +242,14 @@ export default function VoiceConsole() {
               <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '4px' }}>Customer Speech Transcript:</p>
               <p style={{ fontSize: '0.95rem', fontWeight: '600', color: '#fff', marginBottom: '12px' }}>"{interactionResult.transcript}"</p>
               
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '4px' }}>AI Agent Response:</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '4px' }}>AI Agent Response (Audio Output):</p>
               <p style={{ fontSize: '0.95rem', color: '#e2e8f0', lineHeight: '1.5' }}>{interactionResult.ai_response_text}</p>
 
               {/* TTS Audio Player */}
               {audioUrl && (
                 <div style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(99, 102, 241, 0.1)', padding: '10px 14px', borderRadius: '10px' }}>
                   <Volume2 color="#6366f1" size={20} />
-                  <audio controls src={audioUrl} style={{ width: '100%', height: '32px' }} />
+                  <audio controls autoPlay src={audioUrl} style={{ width: '100%', height: '32px' }} />
                 </div>
               )}
             </div>
@@ -276,7 +291,7 @@ export default function VoiceConsole() {
           </div>
         ) : (
           <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-muted)' }}>
-            Speak into your microphone or enter text to inspect real-time agent routing, tool execution, and latency waterfalls.
+            Speak into your microphone or enter text to inspect real-time agent routing, tool execution, and audio synthesis output.
           </div>
         )}
       </div>
