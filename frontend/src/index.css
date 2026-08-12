@@ -31,6 +31,7 @@ body {
   font-family: var(--font-main);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* Monochromatic Card Panels */
@@ -47,7 +48,7 @@ body {
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
 }
 
-/* Black Solid Button */
+/* Buttons */
 .btn-black {
   background: var(--bg-black);
   color: var(--text-white);
@@ -62,6 +63,7 @@ body {
   align-items: center;
   gap: 8px;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .btn-black:hover {
@@ -70,7 +72,6 @@ body {
   transform: translateY(-1px);
 }
 
-/* Outline Pill Button */
 .btn-outline {
   background: transparent;
   color: var(--text-primary);
@@ -84,6 +85,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
 .btn-outline:hover {
@@ -91,7 +93,7 @@ body {
   border-color: #d4d4d8;
 }
 
-/* Pill Badges */
+/* Badges */
 .badge-pill {
   display: inline-flex;
   align-items: center;
@@ -118,7 +120,7 @@ body {
   font-weight: 600;
 }
 
-/* Recording Pulse Indicator */
+/* Pulse animation */
 @keyframes mono-pulse {
   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4); }
   70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(0, 0, 0, 0); }
@@ -128,6 +130,100 @@ body {
 .mono-recording-pulse {
   animation: mono-pulse 1.8s infinite;
   background: #000000 !important;
+}
+
+/* Spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Grids & Media Queries */
+.responsive-two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.responsive-four-column {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+  min-height: 540px;
+  padding: 40px 0;
+}
+
+.bottom-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    min-height: auto;
+    text-align: center;
+  }
+  .hero-grid h1 {
+    font-size: 2.8rem !important;
+  }
+  .hero-grid p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-grid div {
+    justify-content: center;
+  }
+  .responsive-two-column {
+    grid-template-columns: 1fr;
+  }
+  .responsive-four-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bottom-feature-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px !important;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px !important;
+  }
+  .responsive-four-column {
+    grid-template-columns: 1fr;
+  }
+  .subfeatures-ribbon {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .hero-illustration {
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 480px) {
+  .subfeatures-ribbon {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-grid h1 {
+    font-size: 2.2rem !important;
+  }
 }
 
 /* Custom Scrollbar */

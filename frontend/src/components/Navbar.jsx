@@ -3,7 +3,7 @@ import { Mic, Database, UserCheck, BarChart3, Activity, AudioLines } from 'lucid
 
 export default function Navbar({ activeTab, setActiveTab }) {
   return (
-    <header style={{ width: '100%', maxWidth: '1240px', margin: '0 auto', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fafafa' }}>
+    <header className="nav-header" style={{ width: '100%', maxWidth: '1240px', margin: '0 auto', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fafafa' }}>
       {/* Brand Logo */}
       <div 
         onClick={() => setActiveTab('landing')} 
@@ -20,8 +20,8 @@ export default function Navbar({ activeTab, setActiveTab }) {
         </h1>
       </div>
 
-      {/* Middle Navigation Links matching screenshot */}
-      <nav style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+      {/* Middle Navigation Links */}
+      <nav className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         <button onClick={() => setActiveTab('landing')} style={{ background: 'transparent', border: 'none', color: activeTab === 'landing' ? '#000' : '#52525b', fontWeight: activeTab === 'landing' ? '700' : '500', fontSize: '0.9rem', cursor: 'pointer' }}>
           Product
         </button>
@@ -40,7 +40,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
       </nav>
 
       {/* Right Login / Get Started Action Buttons */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <button onClick={() => setActiveTab('voice')} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '600', fontSize: '0.9rem', cursor: 'pointer' }}>
           Log in
         </button>

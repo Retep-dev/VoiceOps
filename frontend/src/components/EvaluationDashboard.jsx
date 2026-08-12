@@ -52,8 +52,9 @@ export default function EvaluationDashboard() {
       </div>
 
       {evalData && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+        <div className="responsive-four-column">
           {/* Card 1: ASR WER / CER */}
+
           <div className="mono-card" style={{ padding: '24px' }}>
             <span style={{ fontSize: '0.75rem', color: '#71717a', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>ASR Performance</span>
             <h3 style={{ fontSize: '2.2rem', fontWeight: '800', color: '#09090b', margin: '8px 0 4px 0' }}>

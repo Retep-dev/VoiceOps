@@ -120,9 +120,10 @@ export default function VoiceConsole() {
 
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 24px 60px 24px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+      <div className="responsive-two-column">
         {/* Left Column: Voice Console */}
         <div className="mono-card" style={{ padding: '28px' }}>
+
           <h2 style={{ fontSize: '1.25rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px', color: '#09090b' }}>
             <Mic size={20} color="#000" />
             Voice Interaction Console

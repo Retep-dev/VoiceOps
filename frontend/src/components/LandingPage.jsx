@@ -19,7 +19,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 24px 80px 24px' }}>
       {/* Hero Section */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '48px', alignItems: 'center', minHeight: '540px', padding: '40px 0' }}>
+      <div className="hero-grid">
         {/* Left Hero Content */}
         <div>
           <div className="badge-pill" style={{ marginBottom: '24px' }}>
@@ -36,7 +36,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
           </p>
 
           {/* CTA Buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '48px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '48px', flexWrap: 'wrap' }}>
             <button onClick={onOpenConsole} className="btn-black" style={{ padding: '14px 28px', fontSize: '1rem' }}>
               Start your free trial <ArrowRight size={18} />
             </button>
@@ -50,12 +50,12 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
           </div>
 
           {/* Sub-feature icons ribbon */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', paddingTop: '24px', borderTop: '1px solid #e4e4e7' }}>
+          <div className="subfeatures-ribbon" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', paddingTop: '24px', borderTop: '1px solid #e4e4e7' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
               <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff' }}>
                 <Mic size={16} color="#000" />
               </div>
-              <div>
+              <div style={{ textAlign: 'left' }}>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#09090b' }}>Speech to Text</h4>
                 <p style={{ fontSize: '0.75rem', color: '#71717a' }}>Accurate ASR</p>
               </div>
@@ -65,7 +65,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
               <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff' }}>
                 <Bot size={16} color="#000" />
               </div>
-              <div>
+              <div style={{ textAlign: 'left' }}>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#09090b' }}>AI Agents</h4>
                 <p style={{ fontSize: '0.75rem', color: '#71717a' }}>Multi-agent system</p>
               </div>
@@ -75,7 +75,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
               <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff' }}>
                 <Zap size={16} color="#000" />
               </div>
-              <div>
+              <div style={{ textAlign: 'left' }}>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#09090b' }}>Smart Actions</h4>
                 <p style={{ fontSize: '0.75rem', color: '#71717a' }}>Tools & Integrations</p>
               </div>
@@ -85,7 +85,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
               <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff' }}>
                 <Volume2 size={16} color="#000" />
               </div>
-              <div>
+              <div style={{ textAlign: 'left' }}>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#09090b' }}>Text to Speech</h4>
                 <p style={{ fontSize: '0.75rem', color: '#71717a' }}>Natural voices</p>
               </div>
@@ -94,12 +94,8 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
         </div>
 
         {/* Right Hero Illustration */}
-        <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          {/* Subtle dotted background grid */}
-          <div style={{ position: 'absolute', top: '10%', right: '15%', width: '60px', height: '60px', backgroundImage: 'radial-gradient(#d4d4d8 1.5px, transparent 1.5px)', backgroundSize: '10px 10px', opacity: 0.8 }}></div>
-
-          {/* Headset Vector Graphic */}
-          <div style={{ position: 'relative', width: '380px', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="hero-illustration" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ position: 'relative', width: '340px', height: '340px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {/* Waveform Lines Left & Right */}
             <div style={{ display: 'flex', gap: '4px', alignItems: 'center', position: 'absolute', left: '-20px' }}>
               <span style={{ width: '3px', height: '12px', background: '#000', borderRadius: '2px' }}></span>
@@ -115,8 +111,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
               <span style={{ width: '3px', height: '12px', background: '#000', borderRadius: '2px' }}></span>
             </div>
 
-            {/* Clean Headset Icon Representation */}
-            <svg width="260" height="260" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="240" height="240" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 14v-3a9 9 0 0 1 18 0v3" />
               <path d="M18 19a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1z" fill="#000" />
               <path d="M6 19a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h1z" fill="#000" />
@@ -126,17 +121,16 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
           </div>
 
           {/* Floating Speech Bubble Card */}
-          <div className="mono-card" style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '340px', padding: '16px 20px', borderRadius: '16px', background: '#ffffff', boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}>
+          <div className="mono-card" style={{ position: 'absolute', bottom: '-10px', width: '320px', padding: '16px 20px', borderRadius: '16px', background: '#ffffff', boxShadow: '0 20px 40px rgba(0,0,0,0.08)', textAling: 'left' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '50%', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fafafa' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fafafa', flexShrink: 0 }}>
                 <Volume2 size={18} color="#000" />
               </div>
-              <p style={{ fontSize: '0.85rem', fontWeight: '600', color: '#09090b', lineHeight: '1.4' }}>
+              <p style={{ fontSize: '0.85rem', fontWeight: '600', color: '#09090b', lineHeight: '1.4', textAlign: 'left' }}>
                 Your order #4821 was shipped yesterday and will arrive tomorrow.
               </p>
             </div>
 
-            {/* Audio Waveform visualization bar */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#fafafa', padding: '8px 12px', borderRadius: '10px', border: '1px solid #f4f4f5' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
                 {[12, 18, 24, 14, 28, 20, 10, 22, 16, 26, 12, 18, 22, 14].map((height, i) => (
@@ -149,13 +143,13 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
         </div>
       </div>
 
-      {/* Trusted Customer Logos Ribbon */}
+      {/* Customer Logos Ribbon */}
       <div style={{ margin: '60px 0 80px 0', textAlign: 'center', borderTop: '1px solid #e4e4e7', paddingTop: '40px' }}>
         <p style={{ fontSize: '0.85rem', fontWeight: '600', color: '#71717a', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '24px' }}>
           Trusted by growing teams
         </p>
 
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '48px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '36px', flexWrap: 'wrap' }}>
           <span style={{ fontSize: '1.25rem', fontWeight: '900', letterSpacing: '-0.5px', color: '#09090b' }}>ACME</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '1.1rem', fontWeight: '700', color: '#09090b' }}>
             <span style={{ fontSize: '1.4rem' }}>☁</span> Cloudly
@@ -173,8 +167,8 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
       </div>
 
       {/* Bottom Features Grid */}
-      <div className="mono-card" style={{ padding: '48px', borderRadius: '24px', background: '#ffffff' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '48px', alignItems: 'start' }}>
+      <div className="mono-card" style={{ padding: '36px', borderRadius: '24px', background: '#ffffff' }}>
+        <div className="bottom-feature-grid">
           <div>
             <h2 style={{ fontSize: '2.2rem', fontWeight: '800', lineHeight: '1.15', color: '#09090b', marginBottom: '16px' }}>
               Everything you need to deliver exceptional support
@@ -184,9 +178,9 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+          <div className="responsive-four-column">
             {/* Feature Card 1 */}
-            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '220px' }}>
+            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
               <div>
                 <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
                   <Volume2 size={20} color="#000" />
@@ -196,13 +190,13 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
                   Support real-time conversations with accurate ASR and natural TTS.
                 </p>
               </div>
-              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0 }}>
+              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '16px' }}>
                 Learn more <ChevronRight size={14} />
               </button>
             </div>
 
             {/* Feature Card 2 */}
-            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '220px' }}>
+            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
               <div>
                 <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
                   <BookOpen size={20} color="#000" />
@@ -212,13 +206,13 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
                   Find answers instantly from your documents with RAG.
                 </p>
               </div>
-              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0 }}>
+              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '16px' }}>
                 Learn more <ChevronRight size={14} />
               </button>
             </div>
 
             {/* Feature Card 3 */}
-            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '220px' }}>
+            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
               <div>
                 <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
                   <Bot size={20} color="#000" />
@@ -228,13 +222,13 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
                   Specialized agents work together to understand and act.
                 </p>
               </div>
-              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0 }}>
+              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '16px' }}>
                 Learn more <ChevronRight size={14} />
               </button>
             </div>
 
             {/* Feature Card 4 */}
-            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '220px' }}>
+            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
               <div>
                 <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
                   <Zap size={20} color="#000" />
@@ -244,7 +238,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
                   Perform real actions using secure tools and integrations.
                 </p>
               </div>
-              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0 }}>
+              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '16px' }}>
                 Learn more <ChevronRight size={14} />
               </button>
             </div>
