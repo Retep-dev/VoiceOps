@@ -1,56 +1,53 @@
 import React from 'react';
-import { Mic, Database, UserCheck, BarChart3, Activity } from 'lucide-react';
+import { Mic, Database, UserCheck, BarChart3, Activity, AudioLines } from 'lucide-react';
 
 export default function Navbar({ activeTab, setActiveTab }) {
-  const tabs = [
-    { id: 'voice', label: 'Voice Console', icon: Mic },
-    { id: 'knowledge', label: 'Knowledge Hub', icon: Database },
-    { id: 'handoff', label: 'Human Escalations', icon: UserCheck },
-    { id: 'evals', label: 'Evaluation & Analytics', icon: BarChart3 },
-  ];
-
   return (
-    <header className="glass-panel" style={{ padding: '16px 32px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div style={{ background: 'linear-gradient(135deg, #06b6d4, #6366f1)', padding: '10px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Activity color="#fff" size={24} />
+    <header style={{ width: '100%', maxWidth: '1240px', margin: '0 auto', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fafafa' }}>
+      {/* Brand Logo */}
+      <div 
+        onClick={() => setActiveTab('landing')} 
+        style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+          <span style={{ width: '3px', height: '14px', background: '#000', borderRadius: '2px' }}></span>
+          <span style={{ width: '3px', height: '22px', background: '#000', borderRadius: '2px' }}></span>
+          <span style={{ width: '3px', height: '12px', background: '#000', borderRadius: '2px' }}></span>
+          <span style={{ width: '3px', height: '18px', background: '#000', borderRadius: '2px' }}></span>
         </div>
-        <div>
-          <h1 className="gradient-text" style={{ fontSize: '1.4rem', fontWeight: '800', letterSpacing: '-0.5px' }}>VoiceOps</h1>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Production AI Voice Support & Operations Platform</p>
-        </div>
+        <h1 style={{ fontSize: '1.4rem', fontWeight: '800', letterSpacing: '-0.5px', color: '#09090b' }}>
+          VoiceOps
+        </h1>
       </div>
 
-      <nav style={{ display: 'flex', gap: '8px', background: 'rgba(255, 255, 255, 0.03)', padding: '6px', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-        {tabs.map((tab) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                background: isActive ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(168, 85, 247, 0.25))' : 'transparent',
-                color: isActive ? '#fff' : 'var(--text-muted)',
-                fontWeight: isActive ? '700' : '500',
-                fontSize: '0.875rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                boxShadow: isActive ? '0 0 15px rgba(99, 102, 241, 0.3)' : 'none',
-              }}
-            >
-              <Icon size={16} color={isActive ? '#38bdf8' : 'currentColor'} />
-              {tab.label}
-            </button>
-          );
-        })}
+      {/* Middle Navigation Links matching screenshot */}
+      <nav style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+        <button onClick={() => setActiveTab('landing')} style={{ background: 'transparent', border: 'none', color: activeTab === 'landing' ? '#000' : '#52525b', fontWeight: activeTab === 'landing' ? '700' : '500', fontSize: '0.9rem', cursor: 'pointer' }}>
+          Product
+        </button>
+        <button onClick={() => setActiveTab('voice')} style={{ background: 'transparent', border: 'none', color: activeTab === 'voice' ? '#000' : '#52525b', fontWeight: activeTab === 'voice' ? '700' : '500', fontSize: '0.9rem', cursor: 'pointer' }}>
+          Voice Console
+        </button>
+        <button onClick={() => setActiveTab('knowledge')} style={{ background: 'transparent', border: 'none', color: activeTab === 'knowledge' ? '#000' : '#52525b', fontWeight: activeTab === 'knowledge' ? '700' : '500', fontSize: '0.9rem', cursor: 'pointer' }}>
+          Knowledge Hub
+        </button>
+        <button onClick={() => setActiveTab('handoff')} style={{ background: 'transparent', border: 'none', color: activeTab === 'handoff' ? '#000' : '#52525b', fontWeight: activeTab === 'handoff' ? '700' : '500', fontSize: '0.9rem', cursor: 'pointer' }}>
+          Escalations
+        </button>
+        <button onClick={() => setActiveTab('evals')} style={{ background: 'transparent', border: 'none', color: activeTab === 'evals' ? '#000' : '#52525b', fontWeight: activeTab === 'evals' ? '700' : '500', fontSize: '0.9rem', cursor: 'pointer' }}>
+          Analytics
+        </button>
       </nav>
+
+      {/* Right Login / Get Started Action Buttons */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+        <button onClick={() => setActiveTab('voice')} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '600', fontSize: '0.9rem', cursor: 'pointer' }}>
+          Log in
+        </button>
+        <button onClick={() => setActiveTab('voice')} className="btn-black" style={{ padding: '9px 20px', fontSize: '0.85rem' }}>
+          Get Started
+        </button>
+      </div>
     </header>
   );
 }
