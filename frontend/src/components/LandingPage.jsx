@@ -17,12 +17,12 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
   };
 
   return (
-    <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 24px 80px 24px' }}>
+    <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 20px 80px 20px' }}>
       {/* Hero Section */}
       <div className="hero-grid">
         {/* Left Hero Content */}
         <div>
-          <div className="badge-pill" style={{ marginBottom: '24px' }}>
+          <div className="badge-pill" style={{ marginBottom: '20px' }}>
             <Sparkles size={14} color="#000" />
             AI VOICE SUPPORT, DONE RIGHT
           </div>
@@ -36,7 +36,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
           </p>
 
           {/* CTA Buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '48px', flexWrap: 'wrap' }}>
+          <div className="hero-cta-group" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '40px', flexWrap: 'wrap' }}>
             <button onClick={onOpenConsole} className="btn-black" style={{ padding: '14px 28px', fontSize: '1rem' }}>
               Start your free trial <ArrowRight size={18} />
             </button>
@@ -51,41 +51,41 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
 
           {/* Sub-feature icons ribbon */}
           <div className="subfeatures-ribbon" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', paddingTop: '24px', borderTop: '1px solid #e4e4e7' }}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-              <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff' }}>
+            <div className="subfeature-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+              <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff', flexShrink: 0 }}>
                 <Mic size={16} color="#000" />
               </div>
-              <div style={{ textAlign: 'left' }}>
+              <div>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#09090b' }}>Speech to Text</h4>
                 <p style={{ fontSize: '0.75rem', color: '#71717a' }}>Accurate ASR</p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-              <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff' }}>
+            <div className="subfeature-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+              <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff', flexShrink: 0 }}>
                 <Bot size={16} color="#000" />
               </div>
-              <div style={{ textAlign: 'left' }}>
+              <div>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#09090b' }}>AI Agents</h4>
                 <p style={{ fontSize: '0.75rem', color: '#71717a' }}>Multi-agent system</p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-              <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff' }}>
+            <div className="subfeature-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+              <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff', flexShrink: 0 }}>
                 <Zap size={16} color="#000" />
               </div>
-              <div style={{ textAlign: 'left' }}>
+              <div>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#09090b' }}>Smart Actions</h4>
                 <p style={{ fontSize: '0.75rem', color: '#71717a' }}>Tools & Integrations</p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-              <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff' }}>
+            <div className="subfeature-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+              <div style={{ padding: '6px', border: '1px solid #e4e4e7', borderRadius: '8px', background: '#fff', flexShrink: 0 }}>
                 <Volume2 size={16} color="#000" />
               </div>
-              <div style={{ textAlign: 'left' }}>
+              <div>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#09090b' }}>Text to Speech</h4>
                 <p style={{ fontSize: '0.75rem', color: '#71717a' }}>Natural voices</p>
               </div>
@@ -94,24 +94,24 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
         </div>
 
         {/* Right Hero Illustration */}
-        <div className="hero-illustration" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div style={{ position: 'relative', width: '340px', height: '340px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {/* Waveform Lines Left & Right */}
-            <div style={{ display: 'flex', gap: '4px', alignItems: 'center', position: 'absolute', left: '-20px' }}>
+        <div className="hero-illustration" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ position: 'relative', width: '280px', height: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {/* Waveform Lines */}
+            <div style={{ display: 'flex', gap: '4px', alignItems: 'center', position: 'absolute', left: '0px' }}>
               <span style={{ width: '3px', height: '12px', background: '#000', borderRadius: '2px' }}></span>
               <span style={{ width: '3px', height: '24px', background: '#000', borderRadius: '2px' }}></span>
               <span style={{ width: '3px', height: '36px', background: '#000', borderRadius: '2px' }}></span>
               <span style={{ width: '3px', height: '18px', background: '#000', borderRadius: '2px' }}></span>
             </div>
 
-            <div style={{ display: 'flex', gap: '4px', alignItems: 'center', position: 'absolute', right: '-20px' }}>
+            <div style={{ display: 'flex', gap: '4px', alignItems: 'center', position: 'absolute', right: '0px' }}>
               <span style={{ width: '3px', height: '18px', background: '#000', borderRadius: '2px' }}></span>
               <span style={{ width: '3px', height: '36px', background: '#000', borderRadius: '2px' }}></span>
               <span style={{ width: '3px', height: '24px', background: '#000', borderRadius: '2px' }}></span>
               <span style={{ width: '3px', height: '12px', background: '#000', borderRadius: '2px' }}></span>
             </div>
 
-            <svg width="240" height="240" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 14v-3a9 9 0 0 1 18 0v3" />
               <path d="M18 19a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1z" fill="#000" />
               <path d="M6 19a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h1z" fill="#000" />
@@ -120,13 +120,13 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
             </svg>
           </div>
 
-          {/* Floating Speech Bubble Card */}
-          <div className="mono-card" style={{ position: 'absolute', bottom: '-10px', width: '320px', padding: '16px 20px', borderRadius: '16px', background: '#ffffff', boxShadow: '0 20px 40px rgba(0,0,0,0.08)', textAling: 'left' }}>
+          {/* Speech Bubble Card */}
+          <div className="mono-card hero-speech-bubble" style={{ padding: '16px 20px', borderRadius: '16px', background: '#ffffff', boxShadow: '0 20px 40px rgba(0,0,0,0.08)', textAlign: 'left' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
               <div style={{ width: '36px', height: '36px', borderRadius: '50%', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fafafa', flexShrink: 0 }}>
                 <Volume2 size={18} color="#000" />
               </div>
-              <p style={{ fontSize: '0.85rem', fontWeight: '600', color: '#09090b', lineHeight: '1.4', textAlign: 'left' }}>
+              <p style={{ fontSize: '0.85rem', fontWeight: '600', color: '#09090b', lineHeight: '1.4' }}>
                 Your order #4821 was shipped yesterday and will arrive tomorrow.
               </p>
             </div>
@@ -144,33 +144,33 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
       </div>
 
       {/* Customer Logos Ribbon */}
-      <div style={{ margin: '60px 0 80px 0', textAlign: 'center', borderTop: '1px solid #e4e4e7', paddingTop: '40px' }}>
-        <p style={{ fontSize: '0.85rem', fontWeight: '600', color: '#71717a', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '24px' }}>
+      <div style={{ margin: '48px 0 60px 0', textAlign: 'center', borderTop: '1px solid #e4e4e7', paddingTop: '32px' }}>
+        <p style={{ fontSize: '0.8rem', fontWeight: '600', color: '#71717a', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '20px' }}>
           Trusted by growing teams
         </p>
 
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '36px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '1.25rem', fontWeight: '900', letterSpacing: '-0.5px', color: '#09090b' }}>ACME</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '1.1rem', fontWeight: '700', color: '#09090b' }}>
-            <span style={{ fontSize: '1.4rem' }}>☁</span> Cloudly
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '28px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '1.15rem', fontWeight: '900', letterSpacing: '-0.5px', color: '#09090b' }}>ACME</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '1rem', fontWeight: '700', color: '#09090b' }}>
+            <span style={{ fontSize: '1.2rem' }}>☁</span> Cloudly
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '1.1rem', fontWeight: '700', color: '#09090b' }}>
-            <span style={{ fontSize: '1.2rem' }}>❖</span> Layerstack
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '1rem', fontWeight: '700', color: '#09090b' }}>
+            <span style={{ fontSize: '1.1rem' }}>❖</span> Layerstack
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '1.1rem', fontWeight: '700', color: '#09090b' }}>
-            <span style={{ fontSize: '1.2rem' }}>✦</span> Spherule
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '1rem', fontWeight: '700', color: '#09090b' }}>
+            <span style={{ fontSize: '1.1rem' }}>✦</span> Spherule
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '1.1rem', fontWeight: '700', color: '#09090b' }}>
-            <span style={{ fontSize: '1.2rem' }}>▶</span> Penta
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '1rem', fontWeight: '700', color: '#09090b' }}>
+            <span style={{ fontSize: '1.1rem' }}>▶</span> Penta
           </div>
         </div>
       </div>
 
       {/* Bottom Features Grid */}
-      <div className="mono-card" style={{ padding: '36px', borderRadius: '24px', background: '#ffffff' }}>
+      <div className="mono-card" style={{ padding: '28px', borderRadius: '24px', background: '#ffffff' }}>
         <div className="bottom-feature-grid">
           <div>
-            <h2 style={{ fontSize: '2.2rem', fontWeight: '800', lineHeight: '1.15', color: '#09090b', marginBottom: '16px' }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: '800', lineHeight: '1.15', color: '#09090b', marginBottom: '14px' }}>
               Everything you need to deliver exceptional support
             </h2>
             <p style={{ fontSize: '0.95rem', color: '#52525b', lineHeight: '1.6' }}>
@@ -180,65 +180,65 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
 
           <div className="responsive-four-column">
             {/* Feature Card 1 */}
-            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
+            <div style={{ background: '#fafafa', padding: '20px 16px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-                  <Volume2 size={20} color="#000" />
+                <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '14px' }}>
+                  <Volume2 size={18} color="#000" />
                 </div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#09090b', marginBottom: '8px' }}>Voice AI</h3>
+                <h3 style={{ fontSize: '1rem', fontWeight: '700', color: '#09090b', marginBottom: '6px' }}>Voice AI</h3>
                 <p style={{ fontSize: '0.8rem', color: '#71717a', lineHeight: '1.5' }}>
                   Support real-time conversations with accurate ASR and natural TTS.
                 </p>
               </div>
-              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '16px' }}>
+              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '14px' }}>
                 Learn more <ChevronRight size={14} />
               </button>
             </div>
 
             {/* Feature Card 2 */}
-            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
+            <div style={{ background: '#fafafa', padding: '20px 16px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-                  <BookOpen size={20} color="#000" />
+                <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '14px' }}>
+                  <BookOpen size={18} color="#000" />
                 </div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#09090b', marginBottom: '8px' }}>Knowledge Retrieval</h3>
+                <h3 style={{ fontSize: '1rem', fontWeight: '700', color: '#09090b', marginBottom: '6px' }}>Knowledge Retrieval</h3>
                 <p style={{ fontSize: '0.8rem', color: '#71717a', lineHeight: '1.5' }}>
                   Find answers instantly from your documents with RAG.
                 </p>
               </div>
-              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '16px' }}>
+              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '14px' }}>
                 Learn more <ChevronRight size={14} />
               </button>
             </div>
 
             {/* Feature Card 3 */}
-            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
+            <div style={{ background: '#fafafa', padding: '20px 16px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-                  <Bot size={20} color="#000" />
+                <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '14px' }}>
+                  <Bot size={18} color="#000" />
                 </div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#09090b', marginBottom: '8px' }}>AI Agents</h3>
+                <h3 style={{ fontSize: '1rem', fontWeight: '700', color: '#09090b', marginBottom: '6px' }}>AI Agents</h3>
                 <p style={{ fontSize: '0.8rem', color: '#71717a', lineHeight: '1.5' }}>
                   Specialized agents work together to understand and act.
                 </p>
               </div>
-              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '16px' }}>
+              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '14px' }}>
                 Learn more <ChevronRight size={14} />
               </button>
             </div>
 
             {/* Feature Card 4 */}
-            <div style={{ background: '#fafafa', padding: '24px 20px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '200px' }}>
+            <div style={{ background: '#fafafa', padding: '20px 16px', borderRadius: '16px', border: '1px solid #f4f4f5', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-                  <Zap size={20} color="#000" />
+                <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: '#fff', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '14px' }}>
+                  <Zap size={18} color="#000" />
                 </div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#09090b', marginBottom: '8px' }}>Smart Actions</h3>
+                <h3 style={{ fontSize: '1rem', fontWeight: '700', color: '#09090b', marginBottom: '6px' }}>Smart Actions</h3>
                 <p style={{ fontSize: '0.8rem', color: '#71717a', lineHeight: '1.5' }}>
                   Perform real actions using secure tools and integrations.
                 </p>
               </div>
-              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '16px' }}>
+              <button onClick={onOpenConsole} style={{ background: 'transparent', border: 'none', color: '#09090b', fontWeight: '700', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', padding: 0, marginTop: '14px' }}>
                 Learn more <ChevronRight size={14} />
               </button>
             </div>

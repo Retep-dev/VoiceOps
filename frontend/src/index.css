@@ -137,7 +137,7 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Responsive Grids & Media Queries */
+/* Layout Grids */
 .responsive-two-column {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -166,22 +166,25 @@ body {
   align-items: start;
 }
 
-@media (max-width: 1024px) {
+/* Mobile & Tablet Responsive Media Queries */
+@media (max-width: 992px) {
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 32px;
     min-height: auto;
     text-align: center;
+    padding: 20px 0;
   }
   .hero-grid h1 {
-    font-size: 2.8rem !important;
+    font-size: 2.5rem !important;
   }
   .hero-grid p {
     margin-left: auto;
     margin-right: auto;
+    font-size: 1rem !important;
   }
-  .hero-grid div {
-    justify-content: center;
+  .hero-cta-group {
+    justify-content: center !important;
   }
   .responsive-two-column {
     grid-template-columns: 1fr;
@@ -196,24 +199,35 @@ body {
 }
 
 @media (max-width: 768px) {
-  .nav-header {
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px !important;
+  .desktop-nav, .desktop-actions {
+    display: none !important;
   }
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px !important;
+  .mobile-hamburger-btn {
+    display: block !important;
   }
   .responsive-four-column {
     grid-template-columns: 1fr;
   }
   .subfeatures-ribbon {
     grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  .subfeature-item {
+    text-align: center !important;
+    justify-content: center !important;
   }
   .hero-illustration {
-    transform: scale(0.85);
+    transform: scale(0.9);
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .hero-speech-bubble {
+    position: relative !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 320px;
+    margin: 16px auto 0 auto !important;
   }
 }
 
@@ -222,7 +236,15 @@ body {
     grid-template-columns: 1fr !important;
   }
   .hero-grid h1 {
-    font-size: 2.2rem !important;
+    font-size: 2rem !important;
+  }
+  .btn-black, .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
   }
 }
 
