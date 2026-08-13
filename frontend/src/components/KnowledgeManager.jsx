@@ -80,8 +80,9 @@ export default function KnowledgeManager() {
 
           <form onSubmit={handleFileUpload} style={{ marginBottom: '24px' }}>
             <div style={{ border: '2px dashed #e4e4e7', borderRadius: '16px', padding: '32px', textAlign: 'center', background: '#fafafa', marginBottom: '16px' }}>
-              <Upload size={32} color="#71717a" style={{ marginBottom: '12px' }} />
+              <Upload size={32} color="#000" style={{ marginBottom: '12px' }} />
               <p style={{ fontSize: '0.9rem', fontWeight: '600', color: '#09090b', marginBottom: '4px' }}>
+
                 {fileToUpload ? fileToUpload.name : 'Select or drag policy files (PDF, DOCX, TXT, CSV)'}
               </p>
               <p style={{ fontSize: '0.75rem', color: '#71717a', marginBottom: '16px' }}>Max size 10MB per file</p>

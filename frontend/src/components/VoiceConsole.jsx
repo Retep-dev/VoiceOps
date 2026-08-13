@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, MicOff, Send, Cpu, Wrench, Volume2, Clock, CheckCircle2, AlertTriangle, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react';
+import { Mic, MicOff, Send, Cpu, Wrench, Volume2, Clock, CheckCircle2, AlertCircle, ShieldCheck, Sparkles, ArrowRight, Package, BookOpen } from 'lucide-react';
 
 export default function VoiceConsole() {
   const [isRecording, setIsRecording] = useState(false);
@@ -123,7 +123,6 @@ export default function VoiceConsole() {
       <div className="responsive-two-column">
         {/* Left Column: Voice Console */}
         <div className="mono-card" style={{ padding: '28px' }}>
-
           <h2 style={{ fontSize: '1.25rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px', color: '#09090b' }}>
             <Mic size={20} color="#000" />
             Voice Interaction Console
@@ -150,7 +149,7 @@ export default function VoiceConsole() {
                   transition: 'all 0.3s ease',
                 }}
               >
-                {isRecording ? <MicOff size={32} /> : <Mic size={32} />}
+                {isRecording ? <MicOff size={32} color="#fff" /> : <Mic size={32} color="#fff" />}
               </button>
             </div>
 
@@ -165,25 +164,28 @@ export default function VoiceConsole() {
               </div>
             )}
 
-            {/* Quick preset buttons */}
+            {/* Quick preset buttons with monochrome Lucide icons */}
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '20px', flexWrap: 'wrap' }}>
               <button
                 onClick={() => submitVoiceInteraction({ text_input: "Where is my recent order ORD-8842?" })}
-                style={{ padding: '6px 14px', fontSize: '0.75rem', fontWeight: '600', borderRadius: '20px', border: '1px solid #e4e4e7', background: '#fff', color: '#09090b', cursor: 'pointer' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', fontSize: '0.75rem', fontWeight: '600', borderRadius: '20px', border: '1px solid #e4e4e7', background: '#fff', color: '#09090b', cursor: 'pointer' }}
               >
-                📦 Check Order ORD-8842
+                <Package size={14} color="#000" />
+                Check Order ORD-8842
               </button>
               <button
                 onClick={() => submitVoiceInteraction({ text_input: "What is your return policy window for items?" })}
-                style={{ padding: '6px 14px', fontSize: '0.75rem', fontWeight: '600', borderRadius: '20px', border: '1px solid #e4e4e7', background: '#fff', color: '#09090b', cursor: 'pointer' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', fontSize: '0.75rem', fontWeight: '600', borderRadius: '20px', border: '1px solid #e4e4e7', background: '#fff', color: '#09090b', cursor: 'pointer' }}
               >
-                📖 Ask RAG Policy
+                <BookOpen size={14} color="#000" />
+                Ask RAG Policy
               </button>
               <button
                 onClick={() => submitVoiceInteraction({ text_input: "I need to speak to a human supervisor right now!" })}
-                style={{ padding: '6px 14px', fontSize: '0.75rem', fontWeight: '600', borderRadius: '20px', border: '1px solid #000', background: '#000', color: '#fff', cursor: 'pointer' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', fontSize: '0.75rem', fontWeight: '600', borderRadius: '20px', border: '1px solid #000', background: '#000', color: '#fff', cursor: 'pointer' }}
               >
-                ⚠️ Human Transfer
+                <AlertCircle size={14} color="#fff" />
+                Human Transfer
               </button>
             </div>
           </div>
@@ -207,7 +209,7 @@ export default function VoiceConsole() {
               }}
             />
             <button type="submit" className="btn-black" disabled={isLoading} style={{ borderRadius: '10px', padding: '12px 20px' }}>
-              <Send size={16} />
+              <Send size={16} color="#fff" />
               Send
             </button>
           </form>

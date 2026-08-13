@@ -45,7 +45,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
               <div style={{ width: '28px', height: '28px', borderRadius: '50%', border: '1px solid #000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Play size={12} fill="#000" />
               </div>
-              Watch demo
+              Play demo
             </button>
           </div>
 
