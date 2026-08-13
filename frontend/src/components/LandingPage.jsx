@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { ArrowRight, Play, Volume2, Mic, Bot, Zap, BookOpen, Sparkles, Check, ChevronRight } from 'lucide-react';
+import DemoModal from './DemoModal';
 
 export default function LandingPage({ onGetStarted, onOpenConsole }) {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
-  const handlePlayDemoAudio = () => {
+  const handlePlayHeroAudio = () => {
     setIsPlayingAudio(true);
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
@@ -18,6 +20,13 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
 
   return (
     <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 20px 80px 20px' }}>
+      {/* Demo Walkthrough Hybrid Modal */}
+      <DemoModal 
+        isOpen={isDemoModalOpen} 
+        onClose={() => setIsDemoModalOpen(false)} 
+        onLaunchConsole={onOpenConsole} 
+      />
+
       {/* Hero Section */}
       <div className="hero-grid">
         {/* Left Hero Content */}
@@ -41,11 +50,11 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
               Start your free trial <ArrowRight size={18} />
             </button>
 
-            <button onClick={handlePlayDemoAudio} className="btn-outline" style={{ padding: '14px 24px', fontSize: '1rem' }}>
+            <button onClick={() => setIsDemoModalOpen(true)} className="btn-outline" style={{ padding: '14px 24px', fontSize: '1rem' }}>
               <div style={{ width: '28px', height: '28px', borderRadius: '50%', border: '1px solid #000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Play size={12} fill="#000" />
               </div>
-              Play demo
+              Watch demo
             </button>
           </div>
 
@@ -121,7 +130,7 @@ export default function LandingPage({ onGetStarted, onOpenConsole }) {
           </div>
 
           {/* Speech Bubble Card */}
-          <div className="mono-card hero-speech-bubble" style={{ padding: '16px 20px', borderRadius: '16px', background: '#ffffff', boxShadow: '0 20px 40px rgba(0,0,0,0.08)', textAlign: 'left' }}>
+          <div onClick={handlePlayHeroAudio} className="mono-card hero-speech-bubble" style={{ padding: '16px 20px', borderRadius: '16px', background: '#ffffff', boxShadow: '0 20px 40px rgba(0,0,0,0.08)', textAlign: 'left', cursor: 'pointer' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
               <div style={{ width: '36px', height: '36px', borderRadius: '50%', border: '1px solid #e4e4e7', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fafafa', flexShrink: 0 }}>
                 <Volume2 size={18} color="#000" />
